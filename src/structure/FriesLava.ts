@@ -75,15 +75,15 @@ export default class LavaFries<T = unknown> extends TypedEmitter<FriesEvents<T>>
         return newNode;
     }
 
-    public spawnPlayer(options: any, queueOption?: any): any {
+    public create(options: any, queueOption?: any): any {
         if (!options.guild) {
-            throw new TypeError("spawnPlayer: Guild is null or undefined.");
+            throw new TypeError("guild is null or undefined.");
         }
         if (!options.voiceChannel) {
-            throw new TypeError("spawnPlayer: voiceChannel is null or undefined.");
+            throw new TypeError("voiceChannel is null or undefined.");
         }
         if (!options.textChannel) {
-            throw new TypeError("spawnPlayer: textChannel is null or undefined.");
+            throw new TypeError("textChannel is null or undefined.");
         }
         const oldPlayer = this.playerCollection.get(options.guild.id);
         if (oldPlayer) return oldPlayer;

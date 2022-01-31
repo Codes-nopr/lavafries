@@ -61,7 +61,17 @@ export default class FriesPlayer<T = unknown> {
         return this.isPaused;
     }
 
-    public get 
+    public get getVolume(): number {
+        return this.vol!;
+    }
+
+    public get getVoiceID(): string | number | undefined {
+        return this.options.voiceChannel.id;
+    }
+
+    public get getGuildID(): string | number | undefined {
+        return this.options.guild.id;
+    }
 
     public connect(): void {
         this.lavafries.post({
@@ -76,7 +86,15 @@ export default class FriesPlayer<T = unknown> {
         this.connected = true;
     }
 
-    public play(): void {
+    public play(
+        options?: {
+            startTime?: number,
+            endTime?: number,
+            volume?: number,
+            noReplace?: boolean,
+            pause?: boolean,
+        },
+        ): void {
         if (this.queue.empty) throw new RangeError("Queue is empty.");
         if (this.connected === false) this.connect();
         const track = this.queue.first;
@@ -85,11 +103,15 @@ export default class FriesPlayer<T = unknown> {
             op: "play",
             track: track.trackString,
             guildId: this.options.guild.id,
-            volume: this?.volume ?? 100,
+            startTime: options?.startTime ?? 0,
+            endTime: options?.endTime ?? null,
+            volume: options?.volume ?? 100,
+            noReplace: options?.noReplace ?? false,
+            pause: options?.pause ?? false,
         });
     }
 
-    public friesSearch(query: string, user: any, options: { source?: "yt" | "sc"; add?: boolean }): Promise<any | any[]> {
+    public friesSearch(query: string, user: any, options?: { source?: "yt" | "sc"; add?: boolean }): Promise<any | any[]> {
         check(query, "string", "Query must be a string.");
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
@@ -230,11 +252,6 @@ export default class FriesPlayer<T = unknown> {
             guildId: this.options.guild.id,
             bands: this.bands.map((gain, band) => ({ band, gain })),
         });
-    }
-
-    public setTextChannel(channel: string): void {
-        check(channel, "string", "Channel ID must be a string.");
-        this.options.textChannel = channel;
     }
 
     public setVoiceChannel(channel: string, waitForConnect?: number): void {

@@ -35,7 +35,7 @@ export default class Utils {
                 tracks: [],
             };
 
-            for (let i: number = 0; i < trackCount; i++) {
+            for (let i: number = 0; i < trackCount; i += 1) {
                 playlistData.tracks.push(this.newTrack(trackArray[i], user));
             }
             return playlistData;
@@ -56,7 +56,7 @@ export default class Utils {
         time.d = Math.floor(time.h / 24);
         time.h %= 24;
 
-        const res = [];
+        const res: string[] = [];
         // eslint-disable-next-line no-restricted-syntax
         for (const [k, v] of Object.entries(time)) {
             let first = false;

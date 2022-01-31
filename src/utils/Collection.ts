@@ -32,8 +32,8 @@ export default class Collection<K, V> extends Map<K, V> {
         return [...this.values()];
     }
 
-    public KArray(): K[] {
-        return [...this.keys()];
+    public KArray(): [K, V][] {
+        return [...this.entries()];
     }
 
     public map<T>(func: (value: V, key: K) => T): T[] {

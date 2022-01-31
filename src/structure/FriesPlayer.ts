@@ -100,6 +100,8 @@ export default class Player<T = unknown> {
                 headers: {
                     Authorization: this.node.options.password,
                 },
+                bodyTimeout: this.node.options.requestTimeout!,
+                headersTimeout: this.node.options.requestTimeout!,
             });
             const {
                 loadType,

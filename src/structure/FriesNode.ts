@@ -32,6 +32,7 @@ export default class Node {
         if (!this.options.secure) this.options.secure = false;
         if (!this.options.retryAmount) this.options.retryAmount = 5;
         if (!this.options.retryDelay) this.options.retryDelay = 5000;
+        if (!this.options.requestTimeout) this.options.requestTimeout = 30e3;
 
         this.stats = {
             players: 0,

@@ -47,6 +47,11 @@ typings/
 # TypeScript cache
 *.tsbuildinfo
 
+# Others
+package-lock.json
+FriesRoutePlanner.js
+FriesRoutePlanner.ts
+
 # Optional npm cache directory
 .npm
 

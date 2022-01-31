@@ -5,6 +5,7 @@ export interface NodeOptions {
     secure?: boolean,
     retryAmount?: number,
     retryDelay?: number
+    requestTimeout?: number,
 }
 
 export interface PlayerStats {

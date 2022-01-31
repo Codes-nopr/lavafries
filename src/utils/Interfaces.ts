@@ -36,3 +36,11 @@ enum OpIncoming {
 export interface IncomingPayloads {
     op: OpIncoming,
 }
+
+export interface PlayOptions {
+    startTime?: number,
+    endTime?: number,
+    volume?: number,
+    noReplace?: boolean,
+    pause?: boolean,
+}

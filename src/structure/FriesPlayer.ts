@@ -7,6 +7,7 @@ import LavaFries from "./FriesLava";
 import Queue from "./FriesQueue";
 import Utils from "../utils/Utils";
 import check from "../utils/Check";
+import type { PlayOptions } from "../utils/Interfaces";
 
 export default class FriesPlayer<T = unknown> {
     public lavafries: any;
@@ -86,15 +87,11 @@ export default class FriesPlayer<T = unknown> {
         this.connected = true;
     }
 
-    public play(
-        options?: {
-            startTime?: number,
-            endTime?: number,
-            volume?: number,
-            noReplace?: boolean,
-            pause?: boolean,
-        },
-        ): void {
+    public play(options?: PlayOptions): void {
+        const extra = options || (["startTime", "endTime", "noReplace"].every((v) => Object.keys(options || {}).includes(v))
+        ? (options as unknown as PlayOptions)
+        : {});
+
         if (this.queue.empty) throw new RangeError("Queue is empty.");
         if (this.connected === false) this.connect();
         const track = this.queue.first;
@@ -103,11 +100,7 @@ export default class FriesPlayer<T = unknown> {
             op: "play",
             track: track.trackString,
             guildId: this.options.guild.id,
-            startTime: options?.startTime ?? 0,
-            endTime: options?.endTime ?? null,
-            volume: options?.volume ?? 100,
-            noReplace: options?.noReplace ?? false,
-            pause: options?.pause ?? false,
+            ...extra,
         });
     }
 
@@ -252,6 +245,11 @@ export default class FriesPlayer<T = unknown> {
             guildId: this.options.guild.id,
             bands: this.bands.map((gain, band) => ({ band, gain })),
         });
+    }
+
+    public setTextChannel(channel: string): void {
+        check(channel, "string", "Channel ID must be a string.");
+        this.options.textChannel = channel;
     }
 
     public setVoiceChannel(channel: string, waitForConnect?: number): void {

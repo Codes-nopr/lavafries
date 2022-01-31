@@ -1,6 +1,6 @@
 import WebSocket from "ws";
-import type { NodeOptions, PlayerStats, IncomingPayloads } from "../utils/Interfaces";
 import Player from "./FriesPlayer";
+import type { NodeOptions, PlayerStats, IncomingPayloads } from "../utils/Interfaces";
 
 export interface NodeEvents {
     nodeConnect(func: any): void;
@@ -14,7 +14,7 @@ export interface NodeEvents {
     socketClosed(func: any, payload: IncomingPayloads | any): void;
 }
 
-export default class Node {
+export default class FriesNode {
     public lavafries: any;
 
     public options: NodeOptions;

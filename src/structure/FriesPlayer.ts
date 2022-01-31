@@ -4,12 +4,11 @@
 import { request } from "undici";
 import BigNumber from "bignumber.js";
 import LavaFries from "./FriesLava";
-import Node from "./FriesNode";
 import Queue from "./FriesQueue";
 import Utils from "../utils/Utils";
 import check from "../utils/Check";
 
-export default class Player<T = unknown> {
+export default class FriesPlayer<T = unknown> {
     public lavafries: any;
 
     public options: any;
@@ -32,7 +31,7 @@ export default class Player<T = unknown> {
 
     public volume?: number;
 
-    public constructor(lavafries: LavaFries, options: any | any[], queueOption?: any, node?: Node) {
+    public constructor(lavafries: LavaFries, options: any | any[], queueOption?: any) {
         this.lavafries = lavafries;
         this.options = options;
         this.node = this.lavafries.leastLoadNode;

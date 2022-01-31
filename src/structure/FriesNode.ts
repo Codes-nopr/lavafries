@@ -123,7 +123,7 @@ export default class FriesNode {
             state,
         } = payload;
 
-        const player = this.lavafries.playerCollection.get(guildId);
+        if (!op) return;
 
         if (op !== "event") {
             // eslint-disable-next-line default-case
@@ -131,8 +131,10 @@ export default class FriesNode {
                 case "stats":
                     this.stats = { ...payload };
                     delete (this.stats as any).op;
-                    break;
+                break;
                 case "playerUpdate":
+                    const player = this.lavafries.playerCollection.get(guildId);
+                    console.log(player.queue.size);
                     if (player) {
                         player.position = state?.position
                         ?? 0;
@@ -140,14 +142,15 @@ export default class FriesNode {
                 break;
             }
         } else if (op === "event") {
+            const player = this.lavafries.playerCollection.get(guildId);
             if (!player) return;
-            player.playState = false;
+            player.isPlaying = false;
             const track = player.queue.first;
 
             // eslint-disable-next-line default-case
             switch (type) {
                 case "TrackStartEvent":
-                    player.playState = true;
+                    player.isPlaying = true;
                     this.lavafries.emit("trackPlay", track, player, payload);
                 break;
 

@@ -159,7 +159,6 @@ export default class FriesPlayer<T = unknown> {
     }
 
     public stop(): void {
-        if (!this.playing) throw new RangeError("Player isn't playing in this guild.");
         this.node.post({
             op: "stop",
             guildId: this.options.guild.id,

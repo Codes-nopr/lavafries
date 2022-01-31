@@ -61,6 +61,8 @@ export default class FriesPlayer<T = unknown> {
         return this.isPaused;
     }
 
+    public get 
+
     public connect(): void {
         this.lavafries.post({
             op: 4,
@@ -171,7 +173,7 @@ export default class FriesPlayer<T = unknown> {
         this.node.post({
             op: "volume",
             guildId: this.options.guild.id,
-            volume: level,
+            volume: this.vol,
         });
     }
 

@@ -111,7 +111,7 @@ export default class FriesPlayer<T = unknown> {
         });
     }
 
-    public friesSearch(query: string, user: any, options?: { source?: "yt" | "sc"; add?: boolean }): Promise<any | any[]> {
+    public friesSearch(query: string, user: any, options: { source?: "yt" | "sc"; add?: boolean }): Promise<any | any[]> {
         check(query, "string", "Query must be a string.");
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {

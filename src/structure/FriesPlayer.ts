@@ -108,7 +108,7 @@ export default class FriesPlayer<T = unknown> {
         check(query, "string", "Query must be a string.");
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
-            const search = /^https?:\/\//g.test(query)
+            const search = /^(?:(?:http|https):\/\/|\w+:)/.test(query)
             ? encodeURI(query)
             : `${options.source || "yt"}search:${query}`;
             const { body } = await request(`http${this.node.options.secure ? "s" : ""}://${this.node.options.host}:${this.node.options.port}/loadtracks?identifier=${search}`, {

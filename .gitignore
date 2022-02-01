@@ -51,6 +51,7 @@ typings/
 package-lock.json
 FriesRoutePlanner.js
 testbot/
+dist/
 
 # Optional npm cache directory
 .npm
@@ -85,7 +86,6 @@ testbot/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/

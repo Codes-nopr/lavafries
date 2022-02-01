@@ -125,6 +125,7 @@ export default class FriesNode {
 
         if (!op) return;
 
+        const player = this.lavafries.playerCollection.get(guildId);
         if (op !== "event") {
             // eslint-disable-next-line default-case
             switch (op) {
@@ -133,8 +134,6 @@ export default class FriesNode {
                     delete (this.stats as any).op;
                 break;
                 case "playerUpdate":
-                    const player = this.lavafries.playerCollection.get(guildId);
-                    console.log(player.queue.size);
                     if (player) {
                         player.position = state?.position
                         ?? 0;

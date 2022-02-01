@@ -1,5 +1,6 @@
 # lavafries
-A mininal and easy to use lavalink client for discord.js
+A fast and minimal lavalink client for discord.js
 
-# Important
-Currently it's under development and can breaking change, an example coming soon!
+![lavafries](https://user-images.githubusercontent.com/71683721/152022680-55561876-8a1c-44d7-a853-53ad2b789eec.png?style=centerme)
+
+# * Under development including documentation

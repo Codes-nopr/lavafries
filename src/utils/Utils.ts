@@ -5,7 +5,6 @@ export default class Utils {
         if (!data.info || !data.track) throw new Error("newTrack() The \"data\" must be a LavaLink track.");
 
         Object.assign(trackData, data.info);
-        // Object.assign(trackData, load);
         trackData.loadType = load || "UNKNOWN";
         trackData.trackString = data.track;
         trackData.thumbnail = trackData.uri.includes("youtube")

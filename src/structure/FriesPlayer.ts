@@ -144,7 +144,7 @@ export default class FriesPlayer<T = unknown> {
                 break;
 
                 case "TRACK_LOADED":
-                    const trackData = Utils.newTrack(tracks[0], user);
+                    const trackData = Utils.newTrack(tracks[0], user, loadType);
                     arr.push(trackData);
                     if (options.add !== true) return resolve(arr);
                     this.queue.add(trackData);
@@ -152,12 +152,12 @@ export default class FriesPlayer<T = unknown> {
                 break;
 
                 case "PLAYLIST_LOADED":
-                    const playlist = Utils.newPlaylist(data, user);
+                    const playlist = Utils.newPlaylist(data, user, loadType);
                     resolve(playlist);
                 break;
 
                 case "SEARCH_RESULT":
-                    const res = tracks.map((t: any) => Utils.newTrack(t, user));
+                    const res = tracks.map((t: any) => Utils.newTrack(t, user, loadType));
                     resolve(res);
                 break;
             }

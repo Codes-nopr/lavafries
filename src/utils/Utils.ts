@@ -1,10 +1,12 @@
 /* eslint-disable object-shorthand */
 export default class Utils {
-    public static newTrack(data: any, user: any): any {
+    public static newTrack(data: any, user: any, load?: string): any {
         const trackData: any = {};
         if (!data.info || !data.track) throw new Error("newTrack() The \"data\" must be a LavaLink track.");
 
         Object.assign(trackData, data.info);
+        // Object.assign(trackData, load);
+        trackData.loadType = load || "UNKNOWN";
         trackData.trackString = data.track;
         trackData.thumbnail = trackData.uri.includes("youtube")
         ? {
@@ -19,7 +21,7 @@ export default class Utils {
         return trackData;
     }
 
-    public static newPlaylist(data: any, user: any): any {
+    public static newPlaylist(data: any, user: any, load?: string): any {
         const { name, trackCount, tracks: trackArray } = data;
         if (!(name
             || trackCount
@@ -35,8 +37,8 @@ export default class Utils {
                 tracks: [],
             };
 
-            for (let i: number = 0; i < trackCount; i += 1) {
-                playlistData.tracks.push(this.newTrack(trackArray[i], user));
+            for (let i = 0; i < trackCount; i += 1) {
+                playlistData.tracks.push(this.newTrack(trackArray[i], user, load));
             }
             return playlistData;
         }

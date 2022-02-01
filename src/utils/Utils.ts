@@ -2,7 +2,7 @@
 export default class Utils {
     public static newTrack(data: any, user: any, load?: string): any {
         const trackData: any = {};
-        if (!data.info || !data.track) throw new Error("newTrack() The \"data\" must be a LavaLink track.");
+        if (!data.info || !data.track) throw new Error("Data must be a LavaLink track.");
 
         Object.assign(trackData, data.info);
         trackData.loadType = load || "UNKNOWN";

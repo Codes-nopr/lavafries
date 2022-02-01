@@ -7,6 +7,7 @@ import LavaFries from "./FriesLava";
 import Queue from "./FriesQueue";
 import Utils from "../utils/Utils";
 import check from "../utils/Check";
+import loadTypes from "../utils/Constants";
 import type { PlayOptions } from "../utils/Interfaces";
 
 export default class FriesPlayer<T = unknown> {
@@ -135,15 +136,15 @@ export default class FriesPlayer<T = unknown> {
 
             // eslint-disable-next-line default-case
             switch (loadType) {
-                case "NO_MATCHES":
-                    reject(new RangeError("No tracks found about the query."));
+                case loadTypes.noMatches:
+                    resolve(loadType);
                 break;
 
-                case "LOAD_FAILED":
-                    reject(new RangeError("Failed to load the track or playlist."));
+                case loadTypes.loadFailed:
+                    resolve(loadType);
                 break;
 
-                case "TRACK_LOADED":
+                case loadTypes.trackLoaded:
                     const trackData = Utils.newTrack(tracks[0], user, loadType);
                     arr.push(trackData);
                     if (options.add !== true) return resolve(arr);
@@ -151,12 +152,12 @@ export default class FriesPlayer<T = unknown> {
                     resolve(arr);
                 break;
 
-                case "PLAYLIST_LOADED":
+                case loadTypes.playlistLoaded:
                     const playlist = Utils.newPlaylist(data, user, loadType);
                     resolve(playlist);
                 break;
 
-                case "SEARCH_RESULT":
+                case loadTypes.searchResult:
                     const res = tracks.map((t: any) => Utils.newTrack(t, user, loadType));
                     resolve(res);
                 break;

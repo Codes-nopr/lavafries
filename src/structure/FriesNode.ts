@@ -141,7 +141,6 @@ export default class FriesNode {
                 break;
             }
         } else if (op === "event") {
-            const player = this.lavafries.playerCollection.get(guildId);
             if (!player) return;
             player.isPlaying = false;
             const track = player.queue.first;
@@ -164,6 +163,7 @@ export default class FriesNode {
                     } else if (track && player.queue.size > 1) {
                         player.queue.remove();
                         player.play();
+                        this.lavafries.emit("trackEnd", track, player, payload);
                     } else if (track && player.queue.size === 1) {
                         player.queue.remove();
                         this.lavafries.emit("queueEnd", track, player, payload);

@@ -50,7 +50,6 @@ typings/
 # Others
 package-lock.json
 FriesRoutePlanner.js
-FriesRoutePlanner.ts
 testbot/
 
 # Optional npm cache directory
